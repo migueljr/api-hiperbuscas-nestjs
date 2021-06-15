@@ -11,5 +11,6 @@ import { DatabaseModule } from 'src/database/database.module';
     CatsService,
     ...catsProviders,
   ],
+  exports:[CatsService]
 })
 export class CatsModule {}

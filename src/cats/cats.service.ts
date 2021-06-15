@@ -15,6 +15,10 @@ export class CatsService {
     return createdCat.save();
   }
 */
+  execCat(): String {
+    return 'Miau..'
+  }
+
   async findAll(): Promise<Cat[]> {
     return this.catModel.find().exec();
   }

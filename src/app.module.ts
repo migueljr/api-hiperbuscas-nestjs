@@ -1,4 +1,4 @@
-import { AnunciosModule } from './anuncios/anuncios.module';
+import { TokenModule } from './token/token.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,12 +8,12 @@ import { AuthModule } from 'src/auth/auth.module'
 
 @Module({
   imports: [
-    AnunciosModule,
+    TokenModule,
     CatsModule,
     UsersModule,
     AuthModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule { }

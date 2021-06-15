@@ -1,27 +1,29 @@
-import { Model } from 'mongoose';
-import { HttpException, HttpStatus } from '@nestjs/common';
-import { Injectable, Inject } from '@nestjs/common';
-import { User } from 'src/users/interfaces/users.interface';
-import { AuthLoginDto } from './dto/auth.login.dto';
-//import { UserCreateDto } from './dto/user.create.dto';
+import { UsersService } from 'src/users/users.service';
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
 
   constructor(
-    @Inject('USER_MODEL')
-    private userModel: Model<User>,
-  ) {}
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) { }
 
-  async login(data: AuthLoginDto): Promise<any> {
-    return this.userModel.find(data)
-      .then(r=>{
-        if(r.length){
-          return {message:'authenticate success'}
-        }else{
-          throw new HttpException('email or password is invalid.', HttpStatus.FORBIDDEN)
-        }
-      })
+  async validateUser(userEmail: string, userPassword: string) {
+    const user = await this.usersService.getByEmail(userEmail);
+    if (user && user.password === userPassword) {
+      const { _id, name, email } = user;
+      return { id: _id, name, email };
+    }
+
+    return null;
   }
 
+  async login(user: any) {
+    const payload = { email: user.email, sub: user.id };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
 }
