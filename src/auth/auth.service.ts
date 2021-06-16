@@ -1,6 +1,7 @@
 import { UsersService } from 'src/users/users.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, forwardRef, Inject } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { TokenService } from 'src/token/token.service'
 
 @Injectable()
 export class AuthService {
@@ -8,6 +9,8 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
+    @Inject(forwardRef(()=>TokenService))
+    private tokenService: TokenService
   ) { }
 
   async validateUser(userEmail: string, userPassword: string) {
@@ -22,8 +25,17 @@ export class AuthService {
 
   async login(user: any) {
     const payload = { email: user.email, sub: user.id };
+    const token = this.jwtService.sign(payload)
+    
+    const verifyTokenExist = await this.tokenService.getByEmail(user.email)
+
+    if(!verifyTokenExist){
+      this.tokenService.save({email:user.email, hash: token})
+    }else{
+      this.tokenService.update({email:user.email, token: token})
+    }
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: token,
       name: user.name,
       email: user.email
     };
