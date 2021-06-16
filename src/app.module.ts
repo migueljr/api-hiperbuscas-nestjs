@@ -1,3 +1,4 @@
+import { SettingsModule } from './settings/settings.module';
 import { TokenModule } from './token/token.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -8,6 +9,7 @@ import { AuthModule } from 'src/auth/auth.module'
 
 @Module({
   imports: [
+    SettingsModule,
     TokenModule,
     CatsModule,
     UsersModule,
