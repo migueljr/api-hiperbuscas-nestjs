@@ -22,14 +22,10 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           
           script: |
-            rm -R api
-            mkdir api
+            rm -R /var/www/html/api
+            cd /var/www/html/
+            git clone git@github.com:migueljr/api-hiperbuscas-nestjs.git api
             cd api
-            git clone git@github.com:migueljr/api-hiperbuscas-nestjs.git
-            cd api-hiperbuscas-nestjs
             npm i
             npm run build
-            rm -R /var/www/html/dist-api
-            mkdir /var/www/html/dist-api
-            mv /root/api/api-hiperbuscas-nestjs/dist /var/www/html/dist-api
             echo "deploy success"
