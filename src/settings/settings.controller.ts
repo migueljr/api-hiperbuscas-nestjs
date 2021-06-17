@@ -5,7 +5,7 @@ export class SettingsController {
     @Get()
     init(){
         return {
-            site:'hiperbuscas.com',
+            site:'hiperbuscas.com.br',
             version: '1.1.3'
         }
     }
