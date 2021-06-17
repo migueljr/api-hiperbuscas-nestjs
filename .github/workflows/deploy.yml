@@ -30,5 +30,6 @@ jobs:
             npm i
             npm run build
             rm -R /var/www/html/dist-api
+            mkdir /var/www/html/dist-api
             mv /root/api/api-hiperbuscas-nestjs/dist /var/www/html/dist-api
             echo "deploy success"
