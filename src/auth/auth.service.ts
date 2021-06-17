@@ -16,15 +16,16 @@ export class AuthService {
   async validateUser(userEmail: string, userPassword: string) {
     const user = await this.usersService.getByEmail(userEmail);
     if (user && user.password === userPassword) {
-      const { _id, name, email } = user;
-      return { id: _id, name, email };
+      const { _id, name, email, level } = user;
+      return user;
     }
 
     return null;
   }
 
   async login(user: any) {
-    const payload = { email: user.email, sub: user.id };
+
+    const payload = { email: user.email, sub: user._id };
     const token = this.jwtService.sign(payload)
     
     const verifyTokenExist = await this.tokenService.getByEmail(user.email)
@@ -37,7 +38,8 @@ export class AuthService {
     return {
       access_token: token,
       name: user.name,
-      email: user.email
+      email: user.email,
+      level: user._doc.level
     };
   }
 }
