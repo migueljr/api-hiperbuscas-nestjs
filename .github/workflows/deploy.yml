@@ -22,10 +22,12 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           
           script: |
+            pm2 delete main
             rm -R /var/www/html/api
             cd /var/www/html/
             git clone git@github.com:migueljr/api-hiperbuscas-nestjs.git api
             cd api
             npm i
             npm run build
+            pm2 start main.js --watch --restart-delay=3000
             echo "deploy success"
