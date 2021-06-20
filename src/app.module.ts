@@ -1,3 +1,4 @@
+import { PaymentMethodsModule } from './payment-methods/payment-methods.module';
 import { SettingsModule } from './settings/settings.module';
 import { TokenModule } from './token/token.module';
 import { Module } from '@nestjs/common';
@@ -9,6 +10,7 @@ import { AuthModule } from 'src/auth/auth.module'
 
 @Module({
   imports: [
+        PaymentMethodsModule, 
     SettingsModule,
     TokenModule,
     CatsModule,
