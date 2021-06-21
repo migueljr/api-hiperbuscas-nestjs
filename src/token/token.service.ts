@@ -1,5 +1,4 @@
 import { Inject, Injectable, UnauthorizedException, forwardRef } from '@nestjs/common';
-import { CatsService } from 'src/cats/cats.service';
 import { Token } from 'src/token/interfaces/token.interface';
 import { Model } from 'mongoose'
 import { AuthService } from 'src/auth/auth.service'

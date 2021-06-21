@@ -1,7 +1,6 @@
 import { TokenService } from './token.service';
 import { TokenController } from './token.controller';
 import { forwardRef, Module } from '@nestjs/common';
-import { CatsModule } from 'src/cats/cats.module';
 import { tokenProviders } from 'src/token/token.providers'
 import { DatabaseModule } from 'src/database/database.module';
 import { AuthModule } from 'src/auth/auth.module';
