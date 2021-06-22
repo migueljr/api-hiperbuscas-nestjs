@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { Evoucher } from './interfaces/evoucher.interface';
 
@@ -9,7 +9,12 @@ export class EvoucherService {
         private evoucherModel: Model<Evoucher>,
     ) {}
 
-    async findAll(): Promise<Evoucher[]> {
-        return this.evoucherModel.find().exec();
+    async findOne(hash: String): Promise<Evoucher> {
+        const result = await this.evoucherModel.findOne({hash});
+        if(!result){
+            throw new HttpException('Evoucher não encontrado', HttpStatus.NOT_FOUND)
+        }
+
+        return result
     }
 }
