@@ -10,6 +10,6 @@ export class PaymentMethodsService {
     ) {}
 
     async findAll(): Promise<PaymentMethod[]> {
-        return this.paymentMethodsModel.find().exec();
+        return this.paymentMethodsModel.find({active:true}).exec();
     }
 }
