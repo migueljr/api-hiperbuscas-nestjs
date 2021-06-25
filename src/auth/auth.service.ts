@@ -36,6 +36,7 @@ export class AuthService {
       this.tokenService.update({email:user.email, token: token})
     }
     return {
+      id: user._id,
       access_token: token,
       name: user.name,
       email: user.email,
