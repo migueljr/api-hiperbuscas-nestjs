@@ -1,17 +1,16 @@
 import { Document } from 'mongoose';
 
 export interface Annoucement extends Document {
-  readonly hash: String;
-  readonly adminId: String;
+  readonly title: String;
+  readonly content: String;
   readonly price: String;
-  readonly days: Number;
-  readonly dateCreate: String;
-  readonly dateActive: String;
-  readonly dateModify: String;
-  readonly dateUpdate: String;
-  readonly userId: String;
-  readonly annoucementId: String;
+  readonly images: [];
+  readonly categories: String;
+  readonly payment_method_id: String;
+  readonly payment_detail: String;
+  readonly order_id: String;
   readonly active: Boolean;
-  readonly name: String;
-  readonly orderId: String;
+  readonly date_created: Date;
+  readonly date_updated: Date;
+  readonly user_id: String
 }

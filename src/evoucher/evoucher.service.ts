@@ -10,6 +10,7 @@ export class EvoucherService {
     ) {}
 
     async findOne(hash: String): Promise<Evoucher> {
+        console.log(hash)
         const result = await this.evoucherModel.findOne({hash});
         if(!result){
             throw new HttpException('Evoucher não encontrado', HttpStatus.NOT_FOUND)

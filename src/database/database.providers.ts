@@ -4,6 +4,6 @@ export const databaseProviders = [
   {
     provide: 'DATABASE_CONNECTION',
     useFactory: (): Promise<typeof mongoose> =>
-      mongoose.connect('mongodb://hiperbuscas.com/nest', {useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology:true}),
+      mongoose.connect('mongodb://localhost:27017/nest', {useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology:true}),
   },
 ];

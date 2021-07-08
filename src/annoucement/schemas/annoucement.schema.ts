@@ -1,20 +1,16 @@
 import * as mongoose from 'mongoose';
 
 export const AnnoucementSchema = new mongoose.Schema({
-  hash: {
-    type: String,
-    required :true,
-  },
-  adminId: String,
+  title: String,
+  content: String,
   price: String,
-  days: Number,
-  dateCreate: String,
-  dateActive: String,
-  dateModify: String,
-  dateUpdate: String,
-  userId: String,
-  annoucementId: String,
+  images: Array,
+  categories: String,
+  payment_method_id: String,
+  payment_detail: String,
+  order_id: String,
   active: Boolean,
-  name: String,
-  orderId: String,
+  date_created: Date,
+  date_updated: Date,
+  user_id: String
 });
